@@ -1,0 +1,70 @@
+19
+
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        // Move fast n steps ahead
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        // Move both pointers
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        // Remove the nth node from the end
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
+}
+
+
+
+
+
+60
+
+
+class Solution {
+    public String getPermutation(int n, int k) {
+        List<Integer> numbers = new ArrayList<>();
+
+        // Store numbers 1 to n
+        for (int i = 1; i <= n; i++) {
+            numbers.add(i);
+        }
+
+        // Factorials
+        int[] fact = new int[n + 1];
+        fact[0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            fact[i] = fact[i - 1] * i;
+        }
+
+        // Convert k to 0-based index
+        k--;
+
+        StringBuilder result = new StringBuilder();
+
+        for (int i = n; i >= 1; i--) {
+            int index = k / fact[i - 1];
+
+            result.append(numbers.get(index));
+            numbers.remove(index);
+
+            k %= fact[i - 1];
+        }
+
+        return result.toString();
+    }
+}
