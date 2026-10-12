@@ -1,0 +1,18 @@
+public class Main {
+
+    static void postorder(int[] arr, int i) {
+        if (i >= arr.length) {
+            return;
+        }
+
+        postorder(arr, 2 * i + 1); // Left
+        postorder(arr, 2 * i + 2); // Right
+        System.out.print(arr[i] + " "); // Root
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+
+        postorder(arr, 0);
+    }
+}
