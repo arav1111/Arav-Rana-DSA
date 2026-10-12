@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main {
+    public static void levelOrder(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(0); // Store array indices
+
+        while (!queue.isEmpty()) {
+            int i = queue.poll();
+
+            System.out.print(arr[i] + " ");
+
+            int left = 2 * i + 1;
+            int right = 2 * i + 2;
+
+            if (left < arr.length) {
+                queue.offer(left);
+            }
+
+            if (right < arr.length) {
+                queue.offer(right);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+
+        levelOrder(arr);
+    }
+}
